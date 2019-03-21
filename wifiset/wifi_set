@@ -1,0 +1,8 @@
+#!/bin/sh
+/bin/systemctl stop hostapd && sleep 2 && /bin/systemctl start wpa_supplicant
+nid=`/usr/bin/sudo   /usr/sbin/wpa_cli add_network| awk '{if(NR==2) print $1}'`
+echo "/usr/bin/sudo  /usr/sbin/wpa_cli set_network $nid ssid $1"
+echo "/usr/bin/sudo  /usr/sbin/wpa_cli set_network $nid psk $2"
+echo "/usr/bin/sudo  /usr/sbin/wpa_cli set_network $1 enable_network $nid"
+echo "/usr/bin/sudo  /usr/sbin/wpa_cli save_config"
+

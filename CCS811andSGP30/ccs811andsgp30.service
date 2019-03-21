@@ -1,0 +1,14 @@
+[Unit]
+Decription=The Sensor Server
+
+[Service]
+Type=simple
+Environment=LANG=C
+ExecStart=/home/pi/src/CCS811andSGP30/ccs811andsgp30.py
+ExecStop=/bin/kill -WINCH ${MAINPID}
+KillSignal=SIGKILL
+PrivateTmp=true
+Restart = always
+
+[Install]
+WantedBy=multi-user.target

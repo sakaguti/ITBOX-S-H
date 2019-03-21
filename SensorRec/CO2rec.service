@@ -1,0 +1,14 @@
+[Unit]
+Decription=The CO2 recorder 
+After=tempController.target apache2.service
+
+[Service]
+Type=simple
+Environment=LANG=C
+ExecStart=/home/pi/src/SensorRec/CO2rec.py
+ExecStop=/bin/kill -WINCH ${MAINPID}
+KillSignal=SIGINT
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

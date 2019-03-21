@@ -1,0 +1,17 @@
+[Unit]
+Decription=The Sensor Server
+
+[Service]
+Type=simple
+Environment=LANG=C
+ExecStartPre=chdir /home/pi/src/SGP30
+ExecStart=/home/pi/src/SGP30/sgp30.py
+StandardOutput=/home/pi/src/CCS811/stdoutput.txt
+StandardError=/home/pi/src/CCS811/stderror.txt
+ExecStop=/bin/kill -WINCH ${MAINPID}
+KillSignal=SIGKILL
+PrivateTmp=true
+Restart = always
+
+[Install]
+WantedBy=multi-user.target
